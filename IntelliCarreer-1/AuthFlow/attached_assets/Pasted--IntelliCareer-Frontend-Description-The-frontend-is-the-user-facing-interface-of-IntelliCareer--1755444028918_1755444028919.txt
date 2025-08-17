@@ -1,0 +1,143 @@
+🖥️ IntelliCareer Frontend Description
+
+The frontend is the user-facing interface of IntelliCareer, designed to be simple, professional, and intuitive. It focuses on guiding users step by step through profile creation, psychometric tests, career recommendations, and skill development suggestions.
+
+1. Landing Page
+
+Hero Section:
+
+Title: "IntelliCareer – Your Personalized AI Career Guide"
+
+Tagline: “Discover your strengths. Find your path. Build your future.”
+
+CTA buttons: Get Started | Login
+
+Why IntelliCareer? (short bullets + icons):
+
+Personalized Recommendations
+
+Psychometric Insights
+
+Skill Gap Analysis
+
+Market-Driven Suggestions
+
+2. User Onboarding / Signup
+
+Login/Signup Page:
+
+Email + Password (or Google/LinkedIn login)
+
+Secure sign-up with data protection disclaimer
+
+Onboarding Questionnaire (Cold-Start Solution):
+
+Basic info: Name, Age, Education, Experience level
+
+Skills checklist (tech, soft, domain-specific)
+
+Career interests/goals (free text + dropdown)
+
+Psychometric test (e.g., Big Five short quiz + RIASEC interests)
+
+Progress bar at top → makes the process engaging
+
+3. Dashboard (After Login)
+
+Clean, minimal layout with 3 main sections:
+
+Career Path Recommendations
+
+Skill Gap Analysis
+
+Learning & Growth Tracker
+
+Top navigation bar:
+
+Home | My Profile | Career Paths | Courses | Saved Items | Settings
+
+4. Career Path Recommendation Page
+
+Dynamic Cards/Grid showing recommended career paths:
+
+Each card → Career Title (e.g., Data Analyst), projected salary, job market demand, relevance score.
+
+A “Why Recommended?” section → transparency in AI recommendations.
+
+Action Buttons:
+
+View Details → Opens detailed career profile (skills needed, roadmap, future trends).
+
+Bookmark → Save for later.
+
+5. Skill Gap Analysis Page
+
+Visualization (Bar/Spider Chart):
+
+Shows current skills vs. required skills for a target role.
+
+Highlights missing skills.
+
+Actionable Suggestions:
+
+“To become a Data Scientist, you need: Python (Intermediate → Advanced), ML Models (Beginner → Intermediate).”
+
+Link to Learning Resources:
+
+Recommended online courses, certifications, or internships.
+
+6. Course & Resource Recommendations
+
+Course cards with:
+
+Title, Provider (Coursera, edX, LinkedIn Learning, etc.)
+
+Difficulty level, Duration, Cost (if available).
+
+Direct “Enroll” button.
+
+7. Learning Tracker
+
+Progress Dashboard:
+
+Track skills you’ve marked as “learning”.
+
+Update progress manually or integrate with course APIs (future).
+
+Gamification:
+
+Badges for completing skill milestones.
+
+“Level up” system (e.g., Beginner → Advanced).
+
+8. Profile Page
+
+User info (editable).
+
+Resume upload & parsing (PDF/DOC → extract skills & experience).
+
+Personality insights from psychometric test.
+
+Saved career paths & courses.
+
+9. Accessibility & Design
+
+Simple, professional UI (light theme, blue/green accents for trust & growth).
+
+Mobile-first responsive design.
+
+WCAG 2.1 AA compliance for accessibility (readable fonts, alt text, contrast).
+
+10. Example User Flow
+
+Riya signs up → completes onboarding test.
+
+Dashboard → “Top 3 Recommended Careers: Data Analyst, AI Engineer, Product Manager.”
+
+Clicks Data Analyst → sees skills required + gap analysis.
+
+Suggested courses: “Intro to Python for Data Science” (Coursera).
+
+Tracks progress on dashboard as she completes skills.
+
+✅ In short: The frontend acts like a career coach dashboard — onboarding → recommendations → skill-gap visualization → learning roadmap → progress tracking.

@@ -6,6 +6,12 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
+// -------------------------
+// LOAD ENVIRONMENT VARIABLES
+// -------------------------
+import dotenv from "dotenv";
+dotenv.config(); // looks for .env in project root
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -15,14 +21,14 @@ app.use(express.urlencoded({ extended: false }));
 // -------------------------
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "MySuperSecret123!@#", // fallback if env not set
+    secret: process.env.SESSION_SECRET || "MySuperSecret123!@#",
     resave: false,
     saveUninitialized: false,
   })
 );
 
 // -------------------------
-// DEBUG ENV VARIABLES (optional, remove later)
+// DEBUG ENV VARIABLES
 // -------------------------
 console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
 console.log("GOOGLE_CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET);
@@ -34,14 +40,14 @@ console.log("GOOGLE_CALLBACK_URL:", process.env.GOOGLE_CALLBACK_URL);
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID!, // use env variable
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!, // use env variable
+      clientID: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       callbackURL:
         process.env.GOOGLE_CALLBACK_URL ||
-        "https://intellicareer-thew.onrender.com/auth/google/callback", // fallback
+        "https://your-app.onrender.com/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      // You can save user info in DB here if needed
+      // Save user info in DB if needed
       return done(null, profile);
     }
   )
@@ -99,7 +105,7 @@ app.get(
 );
 
 // -------------------------
-// ROUTES
+// APP ROUTES
 // -------------------------
 (async () => {
   const server = await registerRoutes(app);
@@ -121,9 +127,8 @@ app.get(
     });
   }
 
-  const port = parseInt(process.env.PORT || "5000", 10); // use env PORT if available
-  server.listen(
-    { port, host: "0.0.0.0", reusePort: true },
-    () => log(`Server running on port ${port}`)
+  const port = parseInt(process.env.PORT || "5000", 10);
+  server.listen({ port, host: "0.0.0.0", reusePort: true }, () =>
+    log(`Server running on port ${port}`)
   );
 })();

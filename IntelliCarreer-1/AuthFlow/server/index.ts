@@ -126,11 +126,12 @@ app.get(
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    const distPath = path.join(__dirname, "public"); // <-- now works
-    app.use(express.static(distPath));
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
+    const clientPath = path.join(__dirname, "../client");
+       app.use(express.static(clientPath));
+       app.get("*", (_req, res) => {
+      res.sendFile(path.join(clientPath, "index.html"));
+     });
+
   }
 
   const port = parseInt(process.env.PORT || "5000", 10);

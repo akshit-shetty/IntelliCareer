@@ -5,12 +5,19 @@ import path from "path";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { fileURLToPath } from "url"; // <-- add this
 
 // -------------------------
 // LOAD ENVIRONMENT VARIABLES
 // -------------------------
 import dotenv from "dotenv";
 dotenv.config(); // looks for .env in project root
+
+// -------------------------
+// ES MODULE __dirname FIX
+// -------------------------
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -47,7 +54,6 @@ passport.use(
         "https://your-app.onrender.com/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      // Save user info in DB if needed
       return done(null, profile);
     }
   )
@@ -120,7 +126,7 @@ app.get(
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    const distPath = path.join(__dirname, "public");
+    const distPath = path.join(__dirname, "public"); // <-- now works
     app.use(express.static(distPath));
     app.get("*", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));

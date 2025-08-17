@@ -11,25 +11,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // -------------------------
-// SESSION SETUP (hardcoded secret)
+// SESSION SETUP
 // -------------------------
 app.use(
   session({
-    secret: "MySuperSecret123!@#", // hardcoded
+    secret: process.env.SESSION_SECRET || "MySuperSecret123!@#", // fallback if env not set
     resave: false,
     saveUninitialized: false,
   })
 );
 
 // -------------------------
-// PASSPORT GOOGLE OAUTH (hardcoded credentials)
+// DEBUG ENV VARIABLES (optional, remove later)
+// -------------------------
+console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
+console.log("GOOGLE_CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET);
+console.log("GOOGLE_CALLBACK_URL:", process.env.GOOGLE_CALLBACK_URL);
+
+// -------------------------
+// PASSPORT GOOGLE OAUTH
 // -------------------------
 passport.use(
   new GoogleStrategy(
     {
-      clientID: "380357188126-8qgtm6iefqi9s1hjp16hvjtedg19mqhn.apps.googleusercontent.com",
-      clientSecret: "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",
-      callbackURL: "https://intellicareer-thew.onrender.com/auth/google/callback",
+      clientID: process.env.GOOGLE_CLIENT_ID!, // use env variable
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!, // use env variable
+      callbackURL:
+        process.env.GOOGLE_CALLBACK_URL ||
+        "https://intellicareer-thew.onrender.com/auth/google/callback", // fallback
     },
     function (accessToken, refreshToken, profile, done) {
       // You can save user info in DB here if needed
@@ -112,7 +121,7 @@ app.get(
     });
   }
 
-  const port = 5000; // hardcoded port
+  const port = parseInt(process.env.PORT || "5000", 10); // use env PORT if available
   server.listen(
     { port, host: "0.0.0.0", reusePort: true },
     () => log(`Server running on port ${port}`)

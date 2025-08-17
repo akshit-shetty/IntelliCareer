@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config({ path: './googleAuth.env' });
 
 import express, { Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";

@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: './googleAuth.env' });
-
 import express, { Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, log } from "./vite";
@@ -14,25 +11,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // -------------------------
-// SESSION SETUP
+// SESSION SETUP (hardcoded secret)
 // -------------------------
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "fallback_secret",
+    secret: "MySuperSecret123!@#", // hardcoded
     resave: false,
     saveUninitialized: false,
   })
 );
 
 // -------------------------
-// PASSPORT GOOGLE OAUTH
+// PASSPORT GOOGLE OAUTH (hardcoded credentials)
 // -------------------------
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL!,
+      clientID: "380357188126-8qgtm6iefqi9s1hjp16hvjtedg19mqhn.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: "https://intellicareer-thew.onrender.com/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       // You can save user info in DB here if needed
@@ -115,7 +112,7 @@ app.get(
     });
   }
 
-  const port = parseInt(process.env.PORT || "5000", 10);
+  const port = 5000; // hardcoded port
   server.listen(
     { port, host: "0.0.0.0", reusePort: true },
     () => log(`Server running on port ${port}`)
